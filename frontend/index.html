@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+    <title>Case</title>
+</head>
+<body>
+    <header>
+        <div class="header__logo">
+            <img src="img/Logo.png" alt="Логотип" class="logo">
+            <h1 class="title">РАСПОЗНАВАНИЕ ОБРАЗА ОГНЕСТРЕЛЬНОГО ОРУЖИЯ
+            </h1>
+        </div>
+        <ul class="header__menu">
+            <li class="menu-item menu-item_active">Распознавание по фото</li>
+            <li class="menu-item">Возможное ТТХ оружия </li>
+            <li class="menu-item">Общая информация</li>
+            <li class="menu-item">Методы противодействия</li>
+        </ul>
+    </header>
+    <div class="main">
+        <div class="main__exPhoto">
+            <div class="title">Примеры фото:</div>
+            <div class="exemples">
+                <div class="exemples__photo"></div>
+                <div class="exemples__photo"></div>
+                <div class="exemples__photo"></div>
+            </div>
+        </div>
+        <div class="workspace">
+            <div class="main__add-photo" id="imageUploader"><div><span>+</span><br>
+                Загрузить изображение</div></div>
+            <input type="file" id="fileInput" style="display: none;" accept="image/*">
+            <div class="main__description" id="typed"></div>
+            <div id="typed-strings">
+                <span>Нейросеть определяет наличие огнестрельного оружия у людей на фото</span>
+            </div>
+            <div class="output">
+                <div class="main__stat">
+                    
+                </div>
+                <!-- Здесь будет инфа о найденном оружии -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <script>
+        let typed = new Typed('#typed', {
+            stringsElement: '#typed-strings',
+            typeSpeed: 20, // Скорость печати
+            startDelay: 500, // Задержка перед стартом анимации // Скорость удаления
+            fadeOut: false,
+            showCursor: false
+        });
+    </script>
+
+</body>
+</html>
