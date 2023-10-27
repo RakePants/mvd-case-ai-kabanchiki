@@ -36,7 +36,7 @@ fileInput.addEventListener("change", function() {
     const formData = new FormData();
     formData.append("image", imageFile);
   
-    fetch("/neuro", {
+    fetch("/photo", {
       method: "POST",
       body: formData,
     })
