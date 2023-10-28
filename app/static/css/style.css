@@ -21,7 +21,7 @@
   font-family: "Play", sans-serif; }
 
 body {
-  background-color: #0D1117; }
+  background: linear-gradient(124deg, rgba(81, 204, 136, 0.11) 20.8%, rgba(205, 32, 167, 0.15) 78.89%), #0D1117; }
 
 header .header__logo {
   display: flex;
@@ -53,15 +53,16 @@ header .header__menu {
 header .header__download {
   height: 5px;
   background: #51CC88;
-  border-radius: 75px;
-  animation: start 4s; }
+  border-radius: 75px; }
+header .animation {
+  animation: start 3s; }
 
 .main {
   overflow: hidden; }
   .main .btn {
     width: 200px;
     height: 90px;
-    border-radius: 27px;
+    border-radius: 12px;
     background: #3FAB6F;
     border: none;
     color: white;
@@ -74,6 +75,8 @@ header .header__download {
     margin-top: 100px;
     justify-content: space-evenly;
     align-items: center; }
+  .main #newImg_button {
+    background-color: #CD20A7; }
   .main__back {
     display: flex;
     justify-content: space-evenly;
@@ -163,5 +166,15 @@ header .header__download {
         font-size: 27px;
         font-weight: 700;
         line-height: normal; }
+    .main .output #count {
+      margin-top: 20px;
+      text-align: center;
+      display: block;
+      width: 500px;
+      color: #ADADAD;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 500;
+      width: 100%; }
 
 /*# sourceMappingURL=style.css.map */

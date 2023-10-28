@@ -6,7 +6,7 @@
 
 body
     // background: linear-gradient(0deg, rgba(0, 0, 0, 0.44) 0%, rgba(0, 0, 0, 0.44) 100%), url(../img/main.png), lightgray 50% / cover no-repeat
-    background-color: #0D1117
+    background: linear-gradient(124deg, rgba(81, 204, 136, 0.11) 20.8%, rgba(205, 32, 167, 0.15) 78.89%), #0D1117
 header
     .header__logo
         display: flex
@@ -39,13 +39,14 @@ header
         height: 5px
         background: #51CC88
         border-radius: 75px
-        animation: start 4s 
+    .animation
+        animation: start 3s
 .main
     overflow: hidden
     .btn
         width: 200px
         height: 90px
-        border-radius: 27px
+        border-radius: 12px
         background: #3FAB6F
         border: none
         color: white
@@ -58,6 +59,8 @@ header
         margin-top: 100px
         justify-content: space-evenly
         align-items: center
+    #newImg_button
+        background-color: #CD20A7
     &__back
         display: flex
         justify-content: space-evenly
@@ -147,3 +150,13 @@ header
                 font-size: 27px
                 font-weight: 700
                 line-height: normal
+        #count
+            margin-top: 20px
+            text-align: center
+            display: block
+            width: 500px
+            color: #ADADAD
+            font-size: 32px
+            font-style: normal
+            font-weight: 500
+            width: 100%

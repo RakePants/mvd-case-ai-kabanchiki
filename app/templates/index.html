@@ -8,8 +8,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+    <link rel=".apple-touch-icon" sizes="180x180" href="../static/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="../static/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="../static/images/icons" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 
-    <title>Case</title>
+
+
+    <title>
+        Распознавание образа огнестрельного оружия
+    </title>
 </head>
 <body>
     <header>
@@ -22,12 +33,12 @@
                     <h1 class="title">РАСПОЗНАВАНИЕ ОБРАЗА ОГНЕСТРЕЛЬНОГО ОРУЖИЯ
                     </h1>
                 </div>
-                <div class="header__download"></div>
+                <div class="header__download animation"></div>
             </div>
         </div>
         .
     </header>
-    <div class="container">
+    <div class="container main">
         <div class="main__exPhoto row">
             <div class="title col-md">Примеры фото:</div>
             <div class="exemples col-md-8">
@@ -39,18 +50,20 @@
         <div class="main container">
             
             <div class="row output animate__animated">
-                <div class="main__back col-md-12">
-                    <button class="btn" id="backBtn">Выбрать новое изображение</button>
-                    <div class="main__add-photo img_400x200"></div>
+                <div class="col-md-12">
+                    <div class="main__back">
+                        <button class="btn" id="backBtn">Выбрать новое изображение</button>
+                        <div class="main__add-photo img_400x200"></div>
+                    </div>
+                    <div id="count"></div>
+                    <div id="counter-strings"><span></span></div>
                 </div>
-                <!-- Здесь будут отображаться лица -->
             </div>
             <div class="row startPage animate__animated">
                 <div class="col-md-7">
                     <div class="main__add-photo animate__animated" id="imageUploader"><div><span>+</span><br>
                         Загрузить изображение</div></div>
                     <input type="file" id="fileInput" style="display: none;" accept="image/*">
-                    <!-- <button class="main__newPhoto">Новое фото</button> -->
                 </div>
                 <div class="col-md-5">
                     <div class="main__description animate__animated" id="typed"></div>
@@ -58,8 +71,8 @@
                         <span>Нейросеть определяет наличие огнестрельного оружия у людей на фото</span>
                     </div>
                     <div class="main__buttons animate__animated">
-                        <button class="btn main__btn" onclick="sendImageToBackend()">Отправить изображение</button>
-                        <button class="btn main__btn">Выбрать другое</button>
+                        <button class="btn" onclick="sendImageToBackend()">Отправить изображение</button>
+                        <button id="newImg_button" class="btn main__btn">Выбрать другое</button>
                     </div>
                 </div> 
             </div>
