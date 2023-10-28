@@ -1,10 +1,12 @@
 @import keyframes
+@import media
 *
     margin: 0
     padding: 0
     font-family: 'Play', sans-serif
 
 body
+    overflow: hidden
     // background: linear-gradient(0deg, rgba(0, 0, 0, 0.44) 0%, rgba(0, 0, 0, 0.44) 100%), url(../img/main.png), lightgray 50% / cover no-repeat
     background: linear-gradient(124deg, rgba(81, 204, 136, 0.11) 20.8%, rgba(205, 32, 167, 0.15) 78.89%), #0D1117
 header
@@ -43,6 +45,8 @@ header
         animation: start 3s
 .main
     overflow: hidden
+    .startPage
+        width: 100%
     .btn
         width: 200px
         height: 90px
@@ -56,6 +60,7 @@ header
         font-weight: 700
     &__buttons
         display: none
+        width: 100%
         margin-top: 100px
         justify-content: space-evenly
         align-items: center
@@ -66,8 +71,19 @@ header
         justify-content: space-evenly
         align-items: center
         .img_400x200
-            width: 400px
-            height: 200px
+            user-select: none
+            display: flex
+            border-radius: 20px
+            border: 5px solid #52CD89
+            text-align: center
+            color: #CDCDCD
+            font-size: 20px
+            font-weight: 500
+            align-items: center
+            justify-content: center
+            overflow: hidden
+            cursor: pointer
+            border-color: #CD20A7
     &__exPhoto
         height: 234px
         display: flex
@@ -76,13 +92,12 @@ header
             color: #FFF
             font-size: 36px
             font-weight: 500
+            text-align: center
         .exemples
             display: flex
             justify-content: space-evenly
             align-items: center
             &__photo
-                width: 270px
-                height: 154px
                 border-radius: 26px
                 border: 4px solid #51CC88
                 margin: 0 20px
@@ -92,8 +107,7 @@ header
     &__add-photo
         user-select: none
         display: flex
-        width: 100%
-        height: 450px
+        height: auto
         border-radius: 59px
         border: 5px solid #52CD89
         text-align: center
@@ -113,12 +127,10 @@ header
     &__description
         text-align: center
         display: block
-        width: 500px
         color: #ADADAD
         font-size: 32px
         font-style: normal
         font-weight: 500
-        width: 100%
     &__newPhoto
         display: none
         margin: 0 auto
