@@ -1,14 +1,32 @@
+@keyframes start {
+  0% {
+    width: 300px; }
+  100% {
+    width: 100%; } }
+@keyframes toLoad {
+  0% {
+    width: 100%; }
+  100% {
+    width: 300px; } }
+@keyframes load {
+  0% {
+    width: 300px;
+    margin-left: 0; }
+  100% {
+    width: 300px;
+    margin-left: 100%; } }
 * {
   margin: 0;
   padding: 0;
   font-family: "Play", sans-serif; }
 
 body {
-  background-color: #0D0E11; }
+  background-color: #0D1117; }
 
 header .header__logo {
   display: flex;
-  align-items: center; }
+  align-items: center;
+  overflow: hidden; }
   header .header__logo .logo {
     width: 108px;
     height: 127px; }
@@ -32,65 +50,115 @@ header .header__menu {
     line-height: normal; }
     header .header__menu .menu-item_active {
       color: #51CC88; }
+header .header__download {
+  height: 5px;
+  background: #51CC88;
+  border-radius: 75px;
+  animation: start 4s; }
 
-.main__exPhoto {
-  height: 234px;
-  display: flex;
-  align-items: center; }
-  .main__exPhoto .title {
-    color: #FFF;
-    font-size: 36px;
-    font-weight: 500; }
-  .main__exPhoto .exemples {
+.main {
+  overflow: hidden; }
+  .main .btn {
+    width: 200px;
+    height: 90px;
+    border-radius: 27px;
+    background: #3FAB6F;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700; }
+  .main__buttons {
+    display: none;
+    margin-top: 100px;
+    justify-content: space-evenly;
+    align-items: center; }
+  .main__back {
     display: flex;
     justify-content: space-evenly;
     align-items: center; }
-    .main__exPhoto .exemples__photo {
-      width: 270px;
-      height: 154px;
-      border-radius: 26px;
-      border: 4px solid #51CC88;
-      margin: 0 20px; }
-.main__add-photo {
-  user-select: none;
-  display: flex;
-  width: 750px;
-  height: 450px;
-  border-radius: 59px;
-  border: 5px solid #52CD89;
-  text-align: center;
-  color: #CDCDCD;
-  font-size: 20px;
-  font-weight: 500;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden; }
-  .main__add-photo:hover {
+    .main__back .img_400x200 {
+      width: 400px;
+      height: 200px; }
+  .main__exPhoto {
+    height: 234px;
+    display: flex;
+    align-items: center; }
+    .main__exPhoto .title {
+      color: #FFF;
+      font-size: 36px;
+      font-weight: 500; }
+    .main__exPhoto .exemples {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center; }
+      .main__exPhoto .exemples__photo {
+        width: 270px;
+        height: 154px;
+        border-radius: 26px;
+        border: 4px solid #51CC88;
+        margin: 0 20px; }
+  .main__add-photo {
+    user-select: none;
+    display: flex;
+    width: 100%;
+    height: 450px;
+    border-radius: 59px;
+    border: 5px solid #52CD89;
+    text-align: center;
+    color: #CDCDCD;
+    font-size: 20px;
+    font-weight: 500;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     cursor: pointer; }
-  .main__add-photo span {
-    font-size: 96px;
-    color: #51CC88; }
-  .main__add-photo img {
-    min-width: 100%;
-    min-height: 100%; }
-.main__description {
-  display: block;
-  width: 500px;
-  color: #ADADAD;
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 500; }
-.main__newPhoto {
-  display: none;
-  margin: 0 auto;
-  margin-top: 20px;
-  color: #51CC88;
-  border-radius: 50px;
-  border: 7px solid #51CC88;
-  background: #171A1D;
-  width: 397px;
-  height: 81px; }
-.main .output {
-  display: none; }
+    .main__add-photo span {
+      font-size: 96px;
+      color: #51CC88; }
+    .main__add-photo img {
+      min-width: 100%;
+      min-height: 100%; }
+  .main__description {
+    text-align: center;
+    display: block;
+    width: 500px;
+    color: #ADADAD;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    width: 100%; }
+  .main__newPhoto {
+    display: none;
+    margin: 0 auto;
+    margin-top: 100px;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: normal;
+    border-radius: 50px;
+    border: 7px solid #51CC88;
+    background: #171A1D;
+    width: 397px;
+    height: 81px; }
+  .main .output {
+    display: none; }
+    .main .output__person {
+      margin-top: 40px;
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center; }
+      .main .output__person .face {
+        width: 152px;
+        height: 171px;
+        border-radius: 32px;
+        border: 7px solid #E03C3C; }
+      .main .output__person .percent {
+        color: #ADADAD;
+        font-size: 27px;
+        font-weight: 700;
+        line-height: normal; }
 
 /*# sourceMappingURL=style.css.map */

@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../static/css/bootstrap-grid.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/animate.min.css">
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,17 +12,19 @@
 </head>
 <body>
     <header>
-        <div class="header__logo row-cols-12">
-            <img src="../static/images/Logo.png" alt="Логотип" class="logo col">
-            <h1 class="title col-10 offset-md-1">РАСПОЗНАВАНИЕ ОБРАЗА ОГНЕСТРЕЛЬНОГО ОРУЖИЯ
-            </h1>
+        <div class="container">
+            <div class="header__logo row">
+                <div class="col-md-2">
+                    <img src="../static/images/Logo.png" alt="Логотип" class="logo">
+                </div>
+                <div class="col-md-9 offset-md-1">
+                    <h1 class="title">РАСПОЗНАВАНИЕ ОБРАЗА ОГНЕСТРЕЛЬНОГО ОРУЖИЯ
+                    </h1>
+                </div>
+                <div class="header__download"></div>
+            </div>
         </div>
-        <!-- <ul class="header__menu">
-            <li class="menu-item menu-item_active">Распознавание по фото</li>
-            <li class="menu-item">Возможное ТТХ оружия </li>
-            <li class="menu-item">Общая информация</li>
-            <li class="menu-item">Методы противодействия</li>
-        </ul> -->
+        .
     </header>
     <div class="container">
         <div class="main__exPhoto row">
@@ -33,38 +36,43 @@
             </div>
         </div>
         <div class="main container">
-            <div class="row">
+            
+            <div class="row output animate__animated">
+                <div class="main__back col-md-12">
+                    <button class="btn" id="backBtn">Выбрать новое изображение</button>
+                    <div class="main__add-photo img_400x200"></div>
+                </div>
+                <!-- Здесь будут отображаться лица -->
+            </div>
+            <div class="row startPage animate__animated">
                 <div class="col-md-7">
-                    <div class="main__add-photo" id="imageUploader"><div><span>+</span><br>
+                    <div class="main__add-photo animate__animated" id="imageUploader"><div><span>+</span><br>
                         Загрузить изображение</div></div>
                     <input type="file" id="fileInput" style="display: none;" accept="image/*">
-                    <button class="main__newPhoto">Новое фото</button>
+                    <!-- <button class="main__newPhoto">Новое фото</button> -->
                 </div>
                 <div class="col-md-5">
-                    <div class="main__description" id="typed"></div>
+                    <div class="main__description animate__animated" id="typed"></div>
                     <div id="typed-strings">
                         <span>Нейросеть определяет наличие огнестрельного оружия у людей на фото</span>
                     </div>
-                    <div class="output">
-                        <!-- Здесь будет инфа о найденном оружии -->
+                    <div class="main__buttons animate__animated">
+                        <button class="btn main__btn" onclick="sendImageToBackend()">Отправить изображение</button>
+                        <button class="btn main__btn">Выбрать другое</button>
                     </div>
                 </div> 
             </div>
+            
         </div>
-        
-       
     </div>
-    <script src="../static/js/script.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <script src="../static/js/wow.min.js"></script>
+    <script src="../static/js/script.js"></script>
+    <script src="js/wow.min.js"></script>
     <script>
-        let typed = new Typed('#typed', {
-            stringsElement: '#typed-strings',
-            typeSpeed: 20, // Скорость печати
-            startDelay: 500, // Задержка перед стартом анимации // Скорость удаления
-            fadeOut: false,
-            showCursor: false
-        });
+        new WOW().init();
     </script>
 
 </body>

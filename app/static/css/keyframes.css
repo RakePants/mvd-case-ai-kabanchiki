@@ -1,0 +1,19 @@
+@keyframes start {
+  0% {
+    width: 300px; }
+  100% {
+    width: 100%; } }
+@keyframes toLoad {
+  0% {
+    width: 100%; }
+  100% {
+    width: 300px; } }
+@keyframes load {
+  0% {
+    width: 300px;
+    margin-left: 0; }
+  100% {
+    width: 300px;
+    margin-left: 100%; } }
+
+/*# sourceMappingURL=keyframes.css.map */
