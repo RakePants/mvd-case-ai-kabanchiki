@@ -33,6 +33,10 @@ backBtn.addEventListener("click", function(){
     startPage.classList.remove("animate__fadeOutLeft");
     startPage.classList.add("animate__fadeInLeft");
   }, 500);
+  let faces = newDesc.children;
+  for(let i = 0; i < faces.length - 1; i++){
+    newDesc.removeChild(faces[1]);
+  }
   imageUploader.querySelector("img").src = "";
   imageUploader.innerHTML = "<div><span>+</span><br>Загрузить изображение</div>";
   info.innerHTML = 'Нейросеть определяет наличие огнестрельного оружия у людей на фото';
@@ -85,7 +89,7 @@ function sendImageToBackend() {
   const formData = new FormData();
   formData.append("image", imageFile);
   updateInfo();
-  fetch("/photo", {
+  fetch("http://localhost:8001/photo", {
     method: "POST",
     body: formData,
   })

@@ -98,7 +98,10 @@ header .header__download {
         height: 154px;
         border-radius: 26px;
         border: 4px solid #51CC88;
-        margin: 0 20px; }
+        margin: 0 20px;
+        overflow: hidden; }
+        .main__exPhoto .exemples__photo img {
+          width: 100%; }
   .main__add-photo {
     user-select: none;
     display: flex;
