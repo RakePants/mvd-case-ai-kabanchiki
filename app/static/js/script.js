@@ -1,3 +1,5 @@
+const { relative } = require("path");
+
 const imageUploader = document.getElementById("imageUploader");
 const fileInput = document.getElementById("fileInput");
 const oldDesc = document.querySelector('.main__description');
@@ -33,9 +35,8 @@ backBtn.addEventListener("click", function(){
     startPage.classList.remove("animate__fadeOutLeft");
     startPage.classList.add("animate__fadeInLeft");
   }, 500);
-  let faces = newDesc.children;
-  for(let i = 0; i < faces.length - 1; i++){
-    newDesc.removeChild(faces[1]);
+  for(let i = newDesc.children.length - 1; i > 0; i--){
+    newDesc.removeChild(newDesc.children[i]);
   }
   imageUploader.querySelector("img").src = "";
   imageUploader.innerHTML = "<div><span>+</span><br>Загрузить изображение</div>";
@@ -89,55 +90,75 @@ function sendImageToBackend() {
   const formData = new FormData();
   formData.append("image", imageFile);
   updateInfo();
-  fetch("http://localhost:8001/photo", {
+  fetch("http://localhost:1001/photo", {
     method: "POST",
     body: formData,
   })
     .then(response => {
-      if (response.ok) {
-        console.log("Изображение успешно отправлено на бекенд.");
-      } else {
-        console.error("Ошибка при отправке изображения на бекенд.");
+      if (response.status === 204) {
+        info.innerHTML = 'Оружие на фото не найдено';
+        type.innerHTML = '';
+        typed = new Typed('#typed', {
+          stringsElement: '#typed-strings',
+          typeSpeed: 60, // Скорость печати
+          startDelay: 0, // Задержка перед стартом анимации // Скорость удаления
+          fadeOut: false,
+          showCursor: false,
+          loop: false
+        });
       }
+      
+      return response.arrayBuffer();
+    })
+    .then(zipData => {
+      return JSZip.loadAsync(zipData);
+    })
+    .then(zip => {
+      zip.forEach((relativePath, file) => {
+        file.async('blob').then(blobData => {
+          const imageUrl = URL.createObjectURL(blobData);
+          updateInfo(imageUrl);
+
+        })
+      });
     })
     .catch(error => {
       console.error("Произошла ошибка при выполнении fetch запроса:", error);
     });
+    startPage.classList.remove("animate__fadeInLeft");
+    startPage.classList.add("animate__fadeOutLeft");
+    setTimeout(function(){
+       newDesc.classList.remove("animate__fadeOutRight");
+       newDesc.classList.add("animate__fadeInRight");
+       newDesc.style.display = 'flex';
+       mainButton.classList.remove("animate__fadeInUp");
+       mainButton.classList.add("animate__fadeInOut"); 
+       mainButton.style.display = "none";
+    }, 500);
 }
 
-function updateInfo(){
-  let weaponNum = 7; //Количество оружия
-  for(let i = 0; i < weaponNum; i++){
-    let newCol = document.createElement("div");
-    let newPerson = document.createElement("div");
-    let newFace = document.createElement("div");
-    let newPercent = document.createElement("div");
-    let newImg = document.createElement("img");
+function updateInfo(imageUrl){
+  let newCol = document.createElement("div");
+  let newPerson = document.createElement("div");
+  let newFace = document.createElement("div");
+  let newPercent = document.createElement("div");
+  let newImg = document.createElement("img");
 
-    newPerson.appendChild(newFace);
-    newPerson.appendChild(newPercent);
-    newFace.appendChild(newImg);
-    newCol.appendChild(newPerson);
-    newDesc.appendChild(newCol);
-    
-    newCol.classList.add("col-md-4");
-    newPerson.classList.add("output__person", "wow", "animate__animated", "animate__fadeInUp");
-    newFace.classList.add("face");
-    newPercent.classList.add("percent");
+  newPerson.appendChild(newFace);
+  newPerson.appendChild(newPercent);
+  newFace.appendChild(newImg);
+  newCol.appendChild(newPerson);
+  newDesc.appendChild(newCol);
+  newImg.src = imageUrl;
+  newCol.classList.add("col-md-4");
+  newPerson.classList.add("output__person", "wow", "animate__animated", "animate__fadeInUp");
+  newFace.classList.add("face");
+  newPercent.classList.add("percent");
 
 
-    newPercent.innerHTML = "Вероятность 30%";
-  }
- startPage.classList.remove("animate__fadeInLeft");
- startPage.classList.add("animate__fadeOutLeft");
- setTimeout(function(){
-    newDesc.classList.remove("animate__fadeOutRight");
-    newDesc.classList.add("animate__fadeInRight");
-    newDesc.style.display = 'flex';
-    mainButton.classList.remove("animate__fadeInUp");
-    mainButton.classList.add("animate__fadeInOut"); 
-    mainButton.style.display = "none";
- }, 500);
+  newPercent.innerHTML = "Вероятность 30%";
+  
+
  
 }
 
