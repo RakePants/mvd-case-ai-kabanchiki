@@ -1,0 +1,64 @@
+version: "3.1"
+
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:latest
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker"
+      - "--log.level=DEBUG"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+#      - ./traefik/traefik.yaml:/traefik.yaml:ro
+#      - ./traefik/tls.yaml:/tls.yaml
+#      - ./traefik/acme.json:/acme.json
+    networks:
+      traefik:
+    restart: always
+
+  app:
+    container_name: app
+    build: app
+    restart: always
+    environment:
+      PYTHONPATH: /usr/src
+    ports:
+      - "8000:8000"
+    labels:
+      - "traefik.http.routers.app.rule=Host(`app.localhost`)"
+    networks:
+      traefik:
+
+  person_with_gun:
+    container_name: person_with_gun
+    build: person_with_gun
+    restart: always
+    environment:
+      PYTHONPATH: /usr/src
+    ports:
+      - "8001:8001"
+    labels:
+      - "traefik.http.routers.person.rule=Host(`person.localhost`)"
+    networks:
+      traefik:
+
+  face_and_gun:
+    container_name: head
+    build: head
+    restart: always
+    environment:
+      PYTHONPATH: /usr/src
+    ports:
+      - "8002:8002"
+    labels:
+      - "traefik.http.routers.head.rule=Host(`head.localhost`)"
+    networks:
+      traefik:
+
+networks:
+  traefik:
+    external: true

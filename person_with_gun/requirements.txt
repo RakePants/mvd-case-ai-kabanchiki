@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pip
+uvicorn
+typing
+ultralytics
+aiofiles
+httpx
