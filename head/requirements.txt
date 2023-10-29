@@ -4,3 +4,4 @@ pip
 uvicorn
 typing
 ultralytics
+requests

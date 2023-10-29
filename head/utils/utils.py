@@ -1,5 +1,4 @@
 from fastapi import HTTPException
-import asyncio
 import os
 import torch
 from PIL import Image
@@ -26,4 +25,7 @@ async def main_coru(file: Image):
 
 
 async def delete_head():
-    os.remove("./predict.jpg")
+    try:
+        os.remove("predict.jpg")
+    except:
+        pass

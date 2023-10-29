@@ -27,7 +27,7 @@ services:
     environment:
       PYTHONPATH: /usr/src
     ports:
-      - "8000:8000"
+      - "1000:1000"
     labels:
       - "traefik.http.routers.app.rule=Host(`app.localhost`)"
     networks:
@@ -40,7 +40,7 @@ services:
     environment:
       PYTHONPATH: /usr/src
     ports:
-      - "8001:8001"
+      - "1001:1001"
     labels:
       - "traefik.http.routers.person.rule=Host(`person.localhost`)"
     networks:
@@ -53,7 +53,7 @@ services:
     environment:
       PYTHONPATH: /usr/src
     ports:
-      - "8002:8002"
+      - "1002:1002"
     labels:
       - "traefik.http.routers.head.rule=Host(`head.localhost`)"
     networks:

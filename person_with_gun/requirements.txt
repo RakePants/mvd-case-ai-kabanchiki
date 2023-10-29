@@ -4,5 +4,4 @@ pip
 uvicorn
 typing
 ultralytics
-aiofiles
-httpx
+requests
