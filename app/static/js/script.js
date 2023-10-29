@@ -1,3 +1,4 @@
+
 const imageUploader = document.getElementById("imageUploader");
 const fileInput = document.getElementById("fileInput");
 const oldDesc = document.querySelector('.main__description');
@@ -9,7 +10,7 @@ const type = document.getElementById("typed");
 const info = document.getElementById("typed-strings").querySelector('span');
 const mainButton = document.querySelector(".main__buttons");
 const newImgButton = document.getElementById("newImg_button");
-
+let imageToBack;
 
 let typed = new Typed('#typed', {
   stringsElement: '#typed-strings',
@@ -33,6 +34,8 @@ imageUploader.addEventListener("click", function() {
 });
 
 backBtn.addEventListener("click", function(){
+  const detectedImg = document.querySelector('.img_400x200');
+  detectedImg.firstChild.remove();
   newDesc.classList.remove("animate__fadeInRight");
   newDesc.classList.add("animate__fadeOutRight");
   setTimeout(function(){
@@ -59,7 +62,7 @@ backBtn.addEventListener("click", function(){
 
 
 fileInput.addEventListener("change", function() {
-  loadAnimation();
+  
   const selectedFile = fileInput.files[0];
   if (selectedFile) {
     // Проверка, что выбран только один файл
@@ -69,6 +72,7 @@ fileInput.addEventListener("change", function() {
         imageUploader.innerHTML = "";
         const newImage = document.createElement("img");
         newImage.src = event.target.result;
+        imageToBack = event.target.result;
         imageUploader.appendChild(newImage);
         mainButton.style.display = 'flex';
         mainButton.classList.remove("animate__fadeOutDown");
@@ -77,19 +81,51 @@ fileInput.addEventListener("change", function() {
       fileReader.readAsDataURL(selectedFile);
     } else {
       alert("Пожалуйста, выберите только один файл.");
-      // Очистить input
-      fileInput.value = "";
     }      
   }
 });
 
 function sendImageToBackend() {
-  imageFile = fileInput.files[0];
+  loadAnimation();
+  imageFile = imageToBack;
+  console.log(imageToBack);
   fileInput.value = '';
-  console.log(fileInput.files.length); 
-  
+  // Получаем элемент изображения по его id или другому селектору
+  const imageElement = document.getElementById('imageUploader').querySelector("img"); // Замените 'yourImageId' на актуальный идентификатор элемента изображения
+
+  // Создаем холст (canvas) для рисования
+  const canvas = document.createElement('canvas');
+  canvas.width = imageElement.width; // Устанавливаем ширину холста равной ширине изображения
+  canvas.height = imageElement.height; // Устанавливаем высоту холста равной высоте изображения
+
+  // Получаем контекст холста для рисования
+  const context = canvas.getContext('2d');
+
+  // Рисуем изображение на холсте
+  context.drawImage(imageElement, 0, 0, imageElement.width, imageElement.height);
+
+  // Получаем данные изображения в формате Base64 (imageData)
+  const imageData = canvas.toDataURL('image/jpeg'); // Здесь 'image/jpeg' можно заменить на желаемый MIME-тип изображения
+
+
+  const base64Data = imageData.replace(/^data:image\/jpeg;base64,/, '');
+  const blob = base64ToBlob(base64Data, 'image/jpeg');
+
   const formData = new FormData();
-  formData.append("image", imageFile);
+  formData.append('file', blob, imageToBack);
+
+  function base64ToBlob(base64Data, contentType) {
+    const byteCharacters = atob(base64Data);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: contentType });
+  }
+
+  
+  
   fetch("http://localhost:1001/photo", {
     method: "POST",
     body: formData,
@@ -118,41 +154,55 @@ function sendImageToBackend() {
     .then(zip => {
       let counter = 0;
       zip.forEach((relativePath, file) => {
-        counter++;
+        
+        
         file.async('blob').then(blobData => {
           const imageUrl = URL.createObjectURL(blobData);
-          updateInfo(imageUrl);
+          console.log(relativePath);
+          if(relativePath == 'result.jpg'){
+            const detectedImg = document.querySelector('.img_400x200');
+            const newImg = document.createElement("img");
+            newImg.src = imageUrl;
+            detectedImg.appendChild(newImg);
+          } else {
+            updateInfo(imageUrl);
+          }
+
         })
+        counter++;
       });
+      var counterText = document.getElementById("counter-strings").querySelector("span");
+      counterText.innerHTML = "Обнаруженных лиц с оружием: " +  (counter-1);
+      document.getElementById("count").innerHTML = '';
+      typed = new Typed('#count', {
+          stringsElement: '#counter-strings',
+          typeSpeed: 30, // Скорость печати
+          startDelay: 1000, // Задержка перед стартом анимации // Скорость удаления
+          fadeOut: false,
+          showCursor: false,
+          loop: false
+      });
+
+      startPage.classList.remove("animate__fadeInLeft");
+      startPage.classList.add("animate__fadeOutLeft");
+      setTimeout(function(){
+          newDesc.classList.remove("animate__fadeOutRight");
+          newDesc.classList.add("animate__fadeInRight");
+          newDesc.style.display = 'flex';
+          mainButton.classList.remove("animate__fadeInUp");
+          mainButton.classList.add("animate__fadeInOut"); 
+          mainButton.style.display = "none";
+      }, 500);
+      worm.style.animation = 'start 2s';
+      worm.style.width = '100%';
       
     })
     .catch(error => {
       console.error("Произошла ошибка при выполнении fetch запроса:", error);
     });
-    var counterText = document.getElementById("counter-strings").querySelector("span");
-    counterText.innerHTML = "Обнаруженных лиц с оружием: " +  2;
-    document.getElementById("count").innerHTML = '';
-    typed = new Typed('#count', {
-        stringsElement: '#counter-strings',
-        typeSpeed: 30, // Скорость печати
-        startDelay: 1000, // Задержка перед стартом анимации // Скорость удаления
-        fadeOut: false,
-        showCursor: false,
-        loop: false
-    });
-
-    startPage.classList.remove("animate__fadeInLeft");
-    startPage.classList.add("animate__fadeOutLeft");
-    setTimeout(function(){
-        newDesc.classList.remove("animate__fadeOutRight");
-        newDesc.classList.add("animate__fadeInRight");
-        newDesc.style.display = 'flex';
-        mainButton.classList.remove("animate__fadeInUp");
-        mainButton.classList.add("animate__fadeInOut"); 
-        mainButton.style.display = "none";
-    }, 500);
-    worm.style.animation = 'start 2s';
-    worm.style.width = '100%';
+    
+    
+   
 
 }
 
@@ -160,11 +210,9 @@ function updateInfo(imageUrl){
   let newCol = document.createElement("div");
   let newPerson = document.createElement("div");
   let newFace = document.createElement("div");
-  let newPercent = document.createElement("div");
   let newImg = document.createElement("img");
 
   newPerson.appendChild(newFace);
-  newPerson.appendChild(newPercent);
   newFace.appendChild(newImg);
   newCol.appendChild(newPerson);
   newDesc.appendChild(newCol);
@@ -173,10 +221,6 @@ function updateInfo(imageUrl){
   newCol.classList.add("col-md-4");
   newPerson.classList.add("output__person", "wow", "animate__animated", "animate__fadeInUp");
   newFace.classList.add("face");
-  newPercent.classList.add("percent");
-
-
-  newPercent.innerHTML = "Вероятность 30%"; 
 }
 
 function loadAnimation(){

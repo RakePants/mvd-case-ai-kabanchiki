@@ -1,12 +1,22 @@
 @import keyframes
 @import media
+
+@font-face 
+    font-family: "Play-Bold"
+    src: url('../fonts/Play-Bold.ttf') format('ttf')
+    font-weight: bold
+    font-style: normal
+@font-face 
+    font-family: "Play-Regular"
+    src: url('../fonts/Play-Regular.ttf') format('ttf')
+    font-weight: normal
+    font-style: normal
 *
     margin: 0
     padding: 0
-    font-family: 'Play', sans-serif
+    font-family: 'Play-Regular', sans-serif
 
 body
-    overflow: hidden
     // background: linear-gradient(0deg, rgba(0, 0, 0, 0.44) 0%, rgba(0, 0, 0, 0.44) 100%), url(../img/main.png), lightgray 50% / cover no-repeat
     background: linear-gradient(124deg, rgba(81, 204, 136, 0.11) 20.8%, rgba(205, 32, 167, 0.15) 78.89%), #0D1117
 header
@@ -20,23 +30,11 @@ header
         .title
             color: #FFF
             font-size: 36px
+            font-family: 'Play-Bold', sans-serif
             font-style: normal
-            font-weight: 600
+            font-weight: bold
             line-height: normal
             display: block
-    .header__menu
-        margin-top: 50px
-        display: flex
-        justify-content: space-evenly
-        list-style-type: none   
-        .menu-item
-            color: #ADADAD
-            font-size: 26px
-            font-style: normal
-            font-weight: 500
-            line-height: normal
-            &_active
-                color: #51CC88
     .header__download
         height: 5px
         background: #51CC88
@@ -84,6 +82,9 @@ header
             overflow: hidden
             cursor: pointer
             border-color: #CD20A7
+            img
+                min-width: 100%
+                min-height: 100%
     &__exPhoto
         height: 234px
         display: flex
@@ -100,7 +101,6 @@ header
             &__photo
                 border-radius: 26px
                 border: 4px solid #51CC88
-                margin: 0 20px
                 overflow: hidden
                 img
                     width: 100%
@@ -150,18 +150,18 @@ header
             margin-top: 40px
             display: flex
             width: 100%
-            justify-content: space-between
             align-items: center
             .face
-                width: 152px
-                height: 171px
+                width: 180px
+                height: 200px
                 border-radius: 32px
+                margin: 0 auto
+                overflow: hidden
                 border: 7px solid #E03C3C
-            .percent
-                color: #ADADAD
-                font-size: 27px
-                font-weight: 700
-                line-height: normal
+                img
+                    min-width: 100%
+                    min-height: 100%
+                    object-fit: cover
         #count
             margin-top: 20px
             text-align: center

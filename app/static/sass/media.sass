@@ -1,4 +1,7 @@
 @media screen and (max-width: 1700px)
+    header
+        .title
+            font-size: 36px
     .main
         &__add-photo
             width: 100%
@@ -8,9 +11,10 @@
                 &__photo
                     width: 270px
                     height: 154px
+                    margin: 0 20px
         &__description
             width: 100%
-        .img400x200
+        .img_400x200
             width: 400px
             height: 200px
 @media screen and ( max-width: 1400px )
@@ -53,24 +57,32 @@
             width: 250px 
             height: 125px  
 @media screen and ( max-width: 576px )
+    .container
+        width: 300px
+    header
+        .title
+            font-size: 32px
     .main
-        min-height: 1500px
+        min-height: 700px
         &__exPhoto
             .exemples
                 &__photo
-                    height: 50px
+                    margin: 0 12px
+                    height: 36px
+                    width: 75
     .title
         margin: 0 auto
         text-align: center
     .main
         &__add-photo
-            width: 350px
-            min-height: 200px
-            &__description
-                margin: 0 auto
-                margin-top: 20px
-                width: 350px
-                padding-bottom: 50px
+            width: 300px
+            min-height: 160px
+            margin-left: -8px
+        &__description
+            margin: 0 auto
+            margin-top: 20px
+            width: 300px
+            padding-bottom: 50px
 
      
 
